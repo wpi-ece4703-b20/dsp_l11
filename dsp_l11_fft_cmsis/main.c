@@ -32,13 +32,14 @@ void processBuffer(uint16_t x[BUFLEN_SZ], uint16_t y[BUFLEN_SZ]) {
 
 void perfCheck(uint16_t x[BUFLEN_SZ], uint16_t y[BUFLEN_SZ]) {
     int i;
-    for (i=0; i<N; i++) {
+    for (i=0; i<N; i=i+1) {
         samples[2*i]     = adc14_to_f32(x[i]);
         samples[2*i + 1] = 0.0;
     }
     arm_cfft_f32(&arm_cfft_sR_f32_len64, samples, 0, 1);
-    for (i=0; i<N; i++) {
-        y[i] = f32_to_dac14(samples[2*i]);
+    for (i=0; i<N; i=i+1) {
+        y[i] = f32_to_dac14(0.1*(samples[2*i]*samples[2*i] +
+                                 samples[2*i+1]*samples[2*i+1]));
     }
 }
 
