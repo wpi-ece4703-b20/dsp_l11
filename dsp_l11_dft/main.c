@@ -15,7 +15,7 @@ typedef struct {
 
 COMPLEX samples[N];
 
-#define TESTFREQ 2100.0
+#define TESTFREQ 3000.0
 #define SAMPLING_FREQ 8000.0
 
 void initsamples() {
@@ -62,7 +62,7 @@ void perfCheck(uint16_t x[BUFLEN_SZ], uint16_t y[BUFLEN_SZ]) {
     }
     dft();
     for (i=0; i<N; i++) {
-        y[i] = f32_to_dac14(samples[i].real);
+        y[i] = f32_to_dac14(samples[i].real * );
     }
 }
 
