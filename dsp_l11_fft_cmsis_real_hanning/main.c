@@ -46,8 +46,8 @@ void perfCheck(uint16_t x[BUFLEN_SZ], uint16_t y[BUFLEN_SZ]) {
 
     arm_rfft_fast_f32(&armFFT, insamples, outsamples, 0);
 
-    for (i=0; i<N; i++)
-        y[i] = f32_to_dac14(outsamples[i]);
+    for (i=0; i<N; i = i+2)
+        y[i] = y[i+1] = f32_to_dac14(outsamples[i] * outsamples[i] + outsamples[i+1] * outsamples[i+1]);
 
 }
 
